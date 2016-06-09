@@ -1,0 +1,8 @@
+object1: name="something \"str\"", value=, length=3.9, rel=-0.1234
+object2: name = asdf, value = 5, weigth = 4.2, mul = .3, co = -0.15
+# Now see other objects
+player: name="lszabi", passwd = "empty", lvl = 6, hp = 100, flags = 0xC7, rel = -30
+nothing: x = 
+area : x = -30, y = 450, name="Abandoned forest", event=wizard, damage=-50, luck=0.62, flags=d5
+still_nothing:
+message: text="There is a \# in this message.", id=1234 # Message record

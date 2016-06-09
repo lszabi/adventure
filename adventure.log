@@ -1,0 +1,35 @@
+[warn] useless object 'nothing' on line 5
+[warn] useless object 'nothing' on line 5
+[warn] useless object 'still_nothing' on line 7
+[warn] useless object 'nothing' on line 5
+[warn] useless object 'still_nothing' on line 7
+[warn] useless object 'nothing' on line 5
+[warn] useless object 'still_nothing' on line 7
+[warn] useless object 'nothing' on line 5
+[warn] useless object 'still_nothing' on line 7
+Mon Dec  7 17:40:01 2015
+ [warn] useless object 'nothing' on line 5
+Mon Dec  7 17:40:01 2015
+ [warn] useless object 'still_nothing' on line 7
+17:53:47 2015-12-07 [warn] useless object 'nothing' on line 5
+17:53:47 2015-12-07 [warn] useless object 'still_nothing' on line 7
+17:56:28 2015-12-07 [warn] useless object 'nothing' on line 5
+17:56:28 2015-12-07 [warn] useless object 'still_nothing' on line 7
+
+
+17:56:29 2015-12-07 [warn] useless object 'nothing' on line 5
+17:56:29 2015-12-07 [warn] useless object 'still_nothing' on line 7
+
+
+17:56:29 2015-12-07 [warn] useless object 'nothing' on line 5
+17:56:29 2015-12-07 [warn] useless object 'still_nothing' on line 7
+
+
+17:58:42 2015-12-07 [warn] useless object 'test.db' in nothing line 5
+17:58:42 2015-12-07 [warn] useless object 'test.db' in still_nothing line 7
+
+
+17:59:26 2015-12-07 [warn] useless object 'nothing' in test.db line 5
+17:59:26 2015-12-07 [warn] useless object 'still_nothing' in test.db line 7
+
+
