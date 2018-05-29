@@ -1,0 +1,34 @@
+Current version with console handling and new database.
+
+----- Adventure -----
+
+The map has 1M areas: from (-500;-500) to (500;500).
+
+Players can interact with each other in the same area.
+Players receive random items and bonuses at the arrival in an area (if available), can chat and fight each other in the same area.
+Players can work, travel, build, collect, do quests and etc.
+
+SERVER loop:
+	-process stdin
+	-accept socket
+	-process all players
+		-receive
+		-tasks
+		-send
+	-backup if needed
+
+Connection:
+Client: version packet
+Server: error packet (err or ok)
+Client: auth packet
+Server: error packet
+
+Databases:
+-players
+-items
+-world
+-...
+
+todo:
+-items
+	-players give
