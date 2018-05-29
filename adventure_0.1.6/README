@@ -1,0 +1,116 @@
+Older version of the game with items and travel.
+
+----- Adventure -----
+
+The map has 1M areas: from (-500;-500) to (500;500).
+
+Players can interact with each other in the same area.
+Players receive one random item/stack at the arrival in an area (if available).
+
+TODO:
+	-adtools items db
+		-add,rename,delete,modify value,disable
+		-list invertory,replace disabled items
+	-server items
+		-give,take,list invertory
+	-client items
+		-list invertory
+
++ Files
+
+db/players.bin
+	char[16]	player name
+	char[16]	password hash
+	short		x, y
+	int			flags
+		bit 0	rcon admin
+		bit 1	banned
+		...
+	char		task
+	time_t		task_started
+	int			task_arg
+	char[11]	reserved
+	int			max_hp, atk, def, spd, dmg, hp, mv_spd, xp, lvl
+	int[64][2]	( item_id; stack ) * 64
+			item id 0 is empty
+			stack 0 is unique item
+
+db/items.bin
+	int			item id
+	int			value ( in gold or sg. )
+	char[24]	name
+
+db/unique_items.bin
+	int		item_id
+	int		value
+	char[32]	name
+	int[8]		skill bonus: can be negative
+
+db/events.bin
+	int			event_id
+	int			rate
+	char[64]		text
+	char[64]		refuse text
+	int			min_level
+	char			class ( 0: trade, 1: mae )
+	union			trade
+		int[2]		what id
+		short[2]	what ratio
+		int[4]		for id
+		short[4]	for ratio
+		int		unused
+	union			mage
+		int		item_id
+		int		item quantity
+		int[8]		skill bonus
+
+db/types.bin
+	int			type id
+	int			rate
+	char[32]	name
+	int[8]		item id (material)
+	int			animal pop
+	int			animal level
+
+map/region_[xy].bin
+	int		type
+	int		event
+	int[64][3]	( item id; item stack; timestamp ) * 64
+
++ Protocol
+
+Client init:
+	Connect
+	server AD_MAGIC_SERVER
+	client AD_MAGIC_CLIENT or AD_LOGOUT;
+	server AD_VER or AD_ERR_MAGIC and disconnect, or AD_CLOSE and disconnect ( if AD_LOGOUT )
+	client int ver_maj, int ver_min, int ver_rev
+	server AD_ACK or AD_ERR_VER and version and disconnect
+	client AD_OK
+	Keep alive
+
+Client login:
+	server AD_AUTH
+	client AD_LOGIN, char[] name
+	server AD_PASSW or AD_ERR_UNAME ( retry 3 times, disconnect AD_CLOSE )
+	client char[] pwd_md5
+	server AD_ACK or AD_ERR_PASSW ( retry 3 times, disconnect AD_CLOSE )
+	Keep alive
+
+Client register:
+	server AD_AUTH
+	client AD_REG, char[] name
+	server AD_PASSW or AD_ERR_UNAME ( retry 3 times, disconnect )
+	client char[] pwd_md5
+	server AD_ACK
+	Keep alive
+	
+Main loop:
+	client [command]
+	server response
+
+Client logout:
+	server [anything]
+	client AD_LOGOUT
+	server AD_CLOSE
+	Disconnect
